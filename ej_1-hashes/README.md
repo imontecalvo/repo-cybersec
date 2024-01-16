@@ -1,4 +1,4 @@
-# Ejercicio 0
+# Ejercicio 1
 ## Enunciado
 Tras mucho estudio y dedicacion lograste conseguir tu primer trabajo en ciberseguridad, haciendo monitoreo de actividades en la red de la empresa PyJ Systems. 
 
