@@ -71,7 +71,7 @@ def listen(config):
 
         d=datetime.datetime.now()
         date = f"{d.year}{d.month}{d.day}-{d.hour}{d.minute}{d.second}"
-        name = f"{name[:-4]}_{date}.{name[-3:]}"
+        name = f"{name}_{date}.zip"
 
         #Enviamos ACK. Si el archivo ya existe, devolvemos error.
         if os.path.exists(f"{config.dir}/{name}"):
