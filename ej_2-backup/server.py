@@ -68,8 +68,14 @@ def listen(config):
         msg_rcv = conn.recv(INIT_MSG_SIZE).decode()
         name, size = parse_init_msg(msg_rcv)
         
-        #Enviamos ACK
-        conn.send("0".encode())
+        #Enviamos ACK. Si el archivo ya existe, devolvemos error.
+        if os.path.exists(f"{config.dir}/{name}"):
+            print(f"[*] El archivo {name} ya existe en el servidor")
+            conn.send("1".encode())
+            conn.close()
+            continue
+        else:
+            conn.send("0".encode())
 
         #Recepcion de archivo
         hash = receive_file(conn, config, name, size)

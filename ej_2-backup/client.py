@@ -74,10 +74,10 @@ def backup(config):
     #Recibimos ACK
     msg_rcv = skt.recv(1).decode()
     if msg_rcv != "0":
-        print("[*] ERROR: El servidor no acusa recibo.")
+        print("[*] ERROR: El servidor no acepta la subida del archivo.")
         return
     
-    # #Envio de archivo
+    #Envio de archivo
     hash = send_file(skt)
 
     #Recibimos ACK
