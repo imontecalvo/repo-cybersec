@@ -3,6 +3,7 @@ import argparse
 from constants import *
 import hashlib
 import os
+import datetime
 
 reset = "\033[0m"
 red = "\033[91m"
@@ -67,7 +68,11 @@ def listen(config):
         #Recepcion de mensaje de inicio
         msg_rcv = conn.recv(INIT_MSG_SIZE).decode()
         name, size = parse_init_msg(msg_rcv)
-        
+
+        d=datetime.datetime.now()
+        date = f"{d.year}{d.month}{d.day}-{d.hour}{d.minute}{d.second}"
+        name = f"{name[:-4]}_{date}.{name[-3:]}"
+
         #Enviamos ACK. Si el archivo ya existe, devolvemos error.
         if os.path.exists(f"{config.dir}/{name}"):
             print(f"[*] El archivo {name} ya existe en el servidor")
