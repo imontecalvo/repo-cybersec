@@ -21,3 +21,25 @@ Parámetros:
 - name: Nombre con que se desea guardar en el servidor el directorio/archivo a respaldar.
 - ip: Dirección IP donde se conectará el cliente.
 - port: Puerto donde se conectará el cliente.
+
+
+## Protocolo
+
+ cliente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; servidor  \
+________________________ \
+  mensaje inicio ---------------->    \
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<--------------------- ACK    \
+  mensaje bloque 1 ----------->    \
+  mensaje bloque 2 ----------->    \
+  mensaje bloque ... ---------->    \
+  mensaje bloque n ----------->    \
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<---------------------- ACK    \
+  mensaje hash --------------->    \
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<---------------- resultado    
+
+Mensajes:
+- Mensaje de inicio (100 bytes): Nombre destino (57 bytes) + Tamaño de archivo en bytes (43 bytes) -> permite hasta 8Tb
+- Mensaje ACK (1 byte): 0 (OK, continuar) , 1 (ERROR, abortar)
+- Mensaje de bloque (1024 bytes): Bytes del bloque i
+- Mensaje de hash SHA1 (40 bytes)
+- Mensaje de resultado (1 byte): 0 (OK) , 1 (ERROR)
